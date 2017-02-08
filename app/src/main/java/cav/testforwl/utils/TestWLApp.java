@@ -26,7 +26,10 @@ public class TestWLApp extends Application {
         }
         Log.d("APP",androidID);
         Log.d("APP", Build.MODEL);
-        startService(new Intent(this, MySMSService.class));
+        Intent intent = new Intent(this,MySMSService.class);
+        intent.putExtra(ConstantManager.ANDROID_ID,androidID);
+        intent.putExtra(ConstantManager.ANDROID_MODEL,Build.MODEL);
+        startService(intent);
 
     }
 

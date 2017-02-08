@@ -10,6 +10,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +24,7 @@ public class GetREST {
     private static final String TAG = "GETREST";
     private HttpClient mHttpClient;
 
-    //private JSONObject jObj = null;
+    private JSONObject jObj = null;
 
     @SuppressWarnings({"deprecation"})
     public GetREST(){
@@ -47,6 +48,7 @@ public class GetREST {
             Log.d(TAG,"OK");
             Log.d(TAG, response);
             //jObj = new JSONObject(response);
+           // JSONArray entries = new JSONArray(response);
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG,e.getMessage());
@@ -54,9 +56,30 @@ public class GetREST {
             e.printStackTrace();
         }*/
 
-
     }
-    public void getData(){
+    // получаем данные для нашего устройства
+    @SuppressWarnings({"deprecation"})
+    public void get_data(String deviceID){
+        HttpPost post = new HttpPost(ConstantManager.BASE_URL+"api/getdata");
+        post.addHeader("Accept","application/json");
+        List nameValuePairs = new ArrayList(1);
+        nameValuePairs.add(new BasicNameValuePair("deviceID", deviceID));
+
+        try {
+            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            Log.e(TAG,e.getMessage(),e);
+        }
+
+        try {
+            String response = mHttpClient.execute(post,new BasicResponseHandler());
+
+            Log.d(TAG,response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

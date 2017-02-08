@@ -8,6 +8,7 @@ import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
+import cav.testforwl.utils.ConstantManager;
 import cav.testforwl.utils.GetREST;
 
 public class MySMSService extends Service {
@@ -32,8 +33,10 @@ public class MySMSService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG,"START COMMAND");
-        myTask();
-        new AsyncReuest().execute();
+        String deviceId = intent.getStringExtra(ConstantManager.ANDROID_ID);
+        String deviceModel = intent.getStringExtra(ConstantManager.ANDROID_MODEL);
+        new AsyncReuest().execute(new String[]{deviceId,deviceModel});
+        myTask(deviceId);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -47,7 +50,7 @@ public class MySMSService extends Service {
         //throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    private void myTask() {
+    private void myTask(final String deviceID) {
         new Thread(new Runnable() {
             public void run() {
                 for (int i = 1; i < 6; i ++) {
@@ -58,17 +61,21 @@ public class MySMSService extends Service {
                     }
                     Log.d("my_tag", "hello from service: " + i);
                 }
+                new GetREST().get_data(deviceID);
+                Log.d(TAG,deviceID);
             }
         }).start();
     }
 
-    class AsyncReuest extends AsyncTask<Void,Void,Void> {
+    class AsyncReuest extends AsyncTask<String[],Void,Void> {
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(String[]... strings) {
             Log.d(TAG,"START HTTP");
-            new GetREST().registry("000000","TEST");
+
+            new GetREST().registry(String.valueOf(strings[0][0]),String.valueOf(strings[0][1]));
             return null;
         }
+
     }
 }
