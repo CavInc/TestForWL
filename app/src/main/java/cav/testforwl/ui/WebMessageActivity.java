@@ -3,7 +3,6 @@ package cav.testforwl.ui;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 
 import java.util.List;
@@ -16,8 +15,8 @@ public class WebMessageActivity extends Activity {
     private static final String TAG = "WEB START";
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.webmessage_activity);
     }
 
