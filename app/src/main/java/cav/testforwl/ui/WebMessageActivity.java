@@ -13,6 +13,8 @@ import cav.testforwl.R;
 
 public class WebMessageActivity extends Activity {
 
+    private static final String TAG = "WEB START";
+
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
@@ -22,6 +24,7 @@ public class WebMessageActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG,"Web START ACTIVITY");
 
         ActivityManager am = (ActivityManager) this
                 .getSystemService(ACTIVITY_SERVICE);

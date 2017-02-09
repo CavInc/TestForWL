@@ -8,4 +8,6 @@
 
     </style>
 
+    <style name="X12" parent="android:Theme.Light"/>
+
 </resources>

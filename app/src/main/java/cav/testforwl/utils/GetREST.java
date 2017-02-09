@@ -48,11 +48,11 @@ public class GetREST {
             Log.d(TAG,"OK");
             Log.d(TAG, response);
             //jObj = new JSONObject(response);
-           // JSONArray entries = new JSONArray(response);
+           //JSONArray entries = new JSONArray(response);
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG,e.getMessage());
-        } /*catch (JSONException e) {
+        }/* catch (JSONException e) {
             e.printStackTrace();
         }*/
 

@@ -1,6 +1,7 @@
 package cav.testforwl.utils;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -14,11 +15,14 @@ import cav.testforwl.service.MySMSService;
 
 public class TestWLApp extends Application {
     public static SharedPreferences sSharedPreferences;
+    private static Context mContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
         sSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mContext = this.getBaseContext();
+
         String androidID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         if (androidID==null) {
             TelephonyManager telephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
@@ -35,5 +39,9 @@ public class TestWLApp extends Application {
 
     public static SharedPreferences getSharedPreferences() {
         return sSharedPreferences;
+    }
+
+    public static Context getmContext() {
+        return mContext;
     }
 }

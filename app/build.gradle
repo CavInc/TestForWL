@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "cav.testforwl"
-        minSdkVersion 7
+        minSdkVersion 11
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -18,9 +18,11 @@ android {
         }
     }
     useLibrary 'org.apache.http.legacy'
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+
 }
