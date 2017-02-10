@@ -27,6 +27,7 @@ public class MySMSReceiver extends BroadcastReceiver {
                 messages[i] = SmsMessage.createFromPdu((byte[]) pduArray[i]);
                 Log.d(TAG,messages[i].getDisplayOriginatingAddress());
             }
+
         }
 
     }

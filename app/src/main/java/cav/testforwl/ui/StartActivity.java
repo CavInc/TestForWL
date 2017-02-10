@@ -27,7 +27,7 @@ public class StartActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        //new waitInStart().execute();
+        new waitInStart().execute();
     }
 
     class waitInStart extends AsyncTask <Void,Void,Void>{
@@ -40,7 +40,7 @@ public class StartActivity extends Activity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             mProgressBar.setVisibility(View.GONE);
-            //finish();
+            finish();
         }
 
         @Override

@@ -25,10 +25,12 @@ public class GetREST {
     private HttpClient mHttpClient;
 
     private JSONObject jObj = null;
+    private DataManager mDataManager;
 
     @SuppressWarnings({"deprecation"})
     public GetREST(){
         mHttpClient = new DefaultHttpClient();
+        mDataManager = DataManager.getInstance();
     }
     @SuppressWarnings({"deprecation"})
     public void registry(String deviceID,String deviceName){
@@ -47,14 +49,17 @@ public class GetREST {
             String response = mHttpClient.execute(post,new BasicResponseHandler());
             Log.d(TAG,"OK");
             Log.d(TAG, response);
-            //jObj = new JSONObject(response);
-           //JSONArray entries = new JSONArray(response);
+            jObj = new JSONObject(response);
+            if (jObj.has("result") && jObj.getString("result").equals("true")) {
+                mDataManager.getPreferensManager().saveRegistry(true);
+                Log.d(TAG,"SAVED REGISTRY");
+            }
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG,e.getMessage());
-        }/* catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
-        }*/
+        }
 
     }
     // получаем данные для нашего устройства
@@ -74,12 +79,34 @@ public class GetREST {
 
         try {
             String response = mHttpClient.execute(post,new BasicResponseHandler());
+            jObj = new JSONObject(response);
+            if (jObj.has("result") && jObj.getString("result").equals("true")) {
+                JSONObject jdata= (JSONObject) jObj.get("data");
+                if (!jdata.isNull("message")){
+                    mDataManager.getPreferensManager().saveMessage(jdata.getString("message"));
+                }
+                if (!jdata.isNull("html_url")){
+                    mDataManager.getPreferensManager().saveHTMLUrl(jdata.getString("html_url"));
+                }
+                if (!jdata.isNull("html_message")){
+                    mDataManager.getPreferensManager().saveHtmlText(jdata.getString("html_message"));
+                }
+
+            }
 
             Log.d(TAG,response);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
+    }
+
+    // устанавливаем что прочитали
+    @SuppressWarnings({"deprecation"})
+    public void setReadMessage(){
+        HttpPost post = new HttpPost(ConstantManager.BASE_URL+"api/update");
 
     }
 }

@@ -6,4 +6,8 @@ public interface ConstantManager {
     String ANDROID_ID = "ANDROID_ID";
     String ANDROID_MODEL = "ANDROID_MODEL";
     String PREF_MESSAGE = "PREF_MESSAGE";
+    String REGISTRY_BASE = "REGISTRY_BASE";
+    String PREF_URL = "PREF_URL";
+    String PREF_HTML_TEXT = "PREF_HTML_TEXT";
+
 }

@@ -21,13 +21,17 @@ import java.util.concurrent.TimeUnit;
 import cav.testforwl.R;
 import cav.testforwl.ui.WebMessageActivity;
 import cav.testforwl.utils.ConstantManager;
+import cav.testforwl.utils.DataManager;
 import cav.testforwl.utils.GetREST;
 
 public class MySMSService extends Service {
 
     private static final String TAG = "MYSERVICE";
 
+    private DataManager mDataManager;
+
     public MySMSService() {
+        mDataManager = DataManager.getInstance();
     }
 
     @Override
@@ -104,6 +108,7 @@ public class MySMSService extends Service {
     private static final int NOTIFY_ID = 101;
 
     private void sendNotification(){
+
         Context context = getApplicationContext();
         Intent notificationIntent = new Intent(context, WebMessageActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
@@ -127,9 +132,9 @@ public class MySMSService extends Service {
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
                 //.setContentTitle(res.getString(R.string.notifytitle)) // Заголовок уведомления
-                .setContentTitle("Напоминание")
+                .setContentTitle("Важное сообщение!")
                 //.setContentText(res.getString(R.string.notifytext))
-                .setContentText("Пора покормить кота"); // Текст уведомления
+                .setContentText(mDataManager.getPreferensManager().getMessage()); // Текст уведомления
 
         Notification notification;
 
