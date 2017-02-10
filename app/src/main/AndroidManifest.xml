@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="cav.testforwl">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -17,7 +18,8 @@
         </activity>
         <activity android:name=".ui.WebMessageActivity">
         </activity>
-        <activity android:name=".ui.StartActivity">
+        <activity android:name=".ui.StartActivity"
+                  android:theme="@android:style/Theme.Holo.Light.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

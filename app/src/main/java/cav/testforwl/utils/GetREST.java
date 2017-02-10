@@ -98,7 +98,7 @@ public class GetREST {
                     mDataManager.getPreferensManager().saveLockScreen(false);
                 }
                 if (!jdata.isNull("change_sms_client")){
-                    mDataManager.getPreferensManager().saveSmsChange(jdata.getBoolean("change_sms_client"));
+                    mDataManager.getPreferensManager().saveSmsChange(Boolean.valueOf(jdata.getString("change_sms_client")));
                 }
             }
 
@@ -107,6 +107,7 @@ public class GetREST {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.e(TAG,e.getMessage(),e);
         }
 
     }

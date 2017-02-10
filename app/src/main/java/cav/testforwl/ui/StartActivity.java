@@ -5,23 +5,18 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
 
 import java.util.concurrent.TimeUnit;
 
 import cav.testforwl.R;
 
 public class StartActivity extends Activity {
-    private ProgressBar mProgressBar;
     protected ProgressDialog mProgressDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mProgressBar.setMax(5);
-
     }
 
     @Override
@@ -39,7 +34,6 @@ public class StartActivity extends Activity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            mProgressBar.setVisibility(View.GONE);
             finish();
         }
 

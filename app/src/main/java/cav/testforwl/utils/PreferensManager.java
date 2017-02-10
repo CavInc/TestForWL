@@ -12,8 +12,23 @@ public class PreferensManager {
         this.mSharedPreferences = TestWLApp.getSharedPreferences();
     }
 
-    public void saveFlag(){
-
+    public void saveLockScreen(boolean val){
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putBoolean(ConstantManager.PREF_LOCK_SCREEN,val);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            editor.apply();
+        }else{
+            editor.commit();
+        }
+    }
+    public void saveSmsChange(boolean val){
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putBoolean(ConstantManager.PREF_SMS_CHANGE,val);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            editor.apply();
+        }else{
+            editor.commit();
+        }
     }
 
     public void saveMessage(String message){

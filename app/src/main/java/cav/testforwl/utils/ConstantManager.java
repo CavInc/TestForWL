@@ -14,4 +14,6 @@ public interface ConstantManager {
     String URL_GETDATA ="api/getdata";
     String URL_UPDATE ="api/update";
 
+    String PREF_LOCK_SCREEN = "PREF_LOCK_SCREEN";
+    String PREF_SMS_CHANGE = "PREG_SMS_CHANGE";
 }
