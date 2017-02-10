@@ -24,13 +24,13 @@ import cav.testforwl.utils.ConstantManager;
 import cav.testforwl.utils.DataManager;
 import cav.testforwl.utils.GetREST;
 
-public class MySMSService extends Service {
+public class MyRequestService extends Service {
 
     private static final String TAG = "MYSERVICE";
 
     private DataManager mDataManager;
 
-    public MySMSService() {
+    public MyRequestService() {
         mDataManager = DataManager.getInstance();
     }
 

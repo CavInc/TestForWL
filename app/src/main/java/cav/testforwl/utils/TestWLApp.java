@@ -10,7 +10,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import cav.testforwl.service.MySMSService;
+import cav.testforwl.service.MyRequestService;
 
 
 public class TestWLApp extends Application {
@@ -30,7 +30,7 @@ public class TestWLApp extends Application {
         }
         Log.d("APP",androidID);
         Log.d("APP", Build.MODEL);
-        Intent intent = new Intent(this,MySMSService.class);
+        Intent intent = new Intent(this,MyRequestService.class);
         intent.putExtra(ConstantManager.ANDROID_ID,androidID);
         intent.putExtra(ConstantManager.ANDROID_MODEL,Build.MODEL);
         startService(intent);

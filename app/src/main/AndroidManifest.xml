@@ -27,7 +27,7 @@
         </activity>
 
         <service
-            android:name=".service.MySMSService"
+            android:name=".service.MyRequestService"
             android:enabled="true"
             android:exported="false">
         </service>
