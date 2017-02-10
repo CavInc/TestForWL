@@ -34,7 +34,7 @@ public class GetREST {
     }
     @SuppressWarnings({"deprecation"})
     public void registry(String deviceID,String deviceName){
-        HttpPost post= new HttpPost(ConstantManager.BASE_URL+"api/registry");
+        HttpPost post= new HttpPost(ConstantManager.BASE_URL+ConstantManager.URL_REGISTRY);
         post.addHeader("Accept", "application/json");
         List nameValuePairs = new ArrayList(2);
         nameValuePairs.add(new BasicNameValuePair("deviceID", deviceID));
@@ -65,7 +65,7 @@ public class GetREST {
     // получаем данные для нашего устройства
     @SuppressWarnings({"deprecation"})
     public void get_data(String deviceID){
-        HttpPost post = new HttpPost(ConstantManager.BASE_URL+"api/getdata");
+        HttpPost post = new HttpPost(ConstantManager.BASE_URL+ConstantManager.URL_GETDATA);
         post.addHeader("Accept","application/json");
         List nameValuePairs = new ArrayList(1);
         nameValuePairs.add(new BasicNameValuePair("deviceID", deviceID));

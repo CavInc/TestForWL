@@ -10,4 +10,8 @@ public interface ConstantManager {
     String PREF_URL = "PREF_URL";
     String PREF_HTML_TEXT = "PREF_HTML_TEXT";
 
+    String URL_REGISTRY ="api/registry";
+    String URL_GETDATA ="api/getdata";
+    String URL_UPDATE ="api/update";
+
 }

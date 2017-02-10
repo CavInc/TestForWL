@@ -37,6 +37,8 @@ public class WebMessageActivity extends Activity {
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.setWebChromeClient(new WebChromeClient());
 
+        mWebView.getSettings().setDefaultTextEncodingName("utf-8");
+
         mDataManager=DataManager.getInstance();
     }
 
@@ -84,7 +86,8 @@ public class WebMessageActivity extends Activity {
             });
         }
     }
-    private void viewText(final String html_mess){
-        mWebView.loadData(html_mess,"text/html","UTF-8");
+    private void viewText(final String htmlMess){
+        //mWebView.loadData(htmlMess,"text/html; charset=UTF-8",null);
+        mWebView.loadDataWithBaseURL(null, htmlMess, "text/html", "utf-8", null);
     }
 }
