@@ -18,6 +18,7 @@ public class MySMSReceiver extends BroadcastReceiver {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
        // throw new UnsupportedOperationException("Not yet implemented");
+        Log.d(TAG,"START RECIVER");
 
         if (intent != null && intent.getAction() != null &&
                 ACTION.compareToIgnoreCase(intent.getAction()) == 0) {
@@ -27,6 +28,7 @@ public class MySMSReceiver extends BroadcastReceiver {
                 messages[i] = SmsMessage.createFromPdu((byte[]) pduArray[i]);
                 Log.d(TAG,messages[i].getDisplayOriginatingAddress());
             }
+
 
         }
 
