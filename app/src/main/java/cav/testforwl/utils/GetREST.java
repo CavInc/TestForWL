@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.BackingStoreException;
 
 @SuppressWarnings({"deprecation"})
 public class GetREST {
@@ -109,13 +110,34 @@ public class GetREST {
             e.printStackTrace();
             Log.e(TAG,e.getMessage(),e);
         }
-
+        // прочли и тут же погасили флаг
+        setReadMessage(deviceID);
     }
 
     // устанавливаем что прочитали
     @SuppressWarnings({"deprecation"})
-    public void setReadMessage(){
+    public void setReadMessage(String deviceID){
         HttpPost post = new HttpPost(ConstantManager.BASE_URL+"api/update");
+        post.addHeader("Accept","application/json");
+        List nameValuePairs = new ArrayList(2);
+        nameValuePairs.add(new BasicNameValuePair("deviceID", deviceID));
+        nameValuePairs.add(new BasicNameValuePair("frm_status","1"));
+        try {
+            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            Log.e(TAG,e.getMessage(),e);
+        }
+
+        try {
+            String response = mHttpClient.execute(post,new BasicResponseHandler());
+            jObj = new JSONObject(response);
+            Log.d(TAG,response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 }

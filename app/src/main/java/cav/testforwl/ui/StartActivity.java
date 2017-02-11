@@ -2,6 +2,7 @@ package cav.testforwl.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,13 @@ public class StartActivity extends Activity {
     protected void onResume() {
         super.onResume();
         new waitInStart().execute();
+        // проверку активностей
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     class waitInStart extends AsyncTask <Void,Void,Void>{

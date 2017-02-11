@@ -49,11 +49,18 @@ public class DBConnect {
 
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+            updateDatabase(sqLiteDatabase,0,DATABASE_VERSION);
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+            updateDatabase(sqLiteDatabase,oldVersion,newVersion);
+        }
+
+        private void updateDatabase(SQLiteDatabase db, int oldVersion, int newVersion){
+            if (oldVersion<1){
+                db.execSQL("");
+            }
 
         }
     }
