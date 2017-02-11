@@ -74,6 +74,7 @@ public class MyRequestService extends Service {
     public void onTaskRemoved(Intent rootIntent) {
         super.onTaskRemoved(rootIntent);
         Log.d(TAG,"Task REMOVED");
+
         if (Build.VERSION.SDK_INT == 19){
             // TODO возможно тут косяк и его надо править
             Intent restartIntent = new Intent(this, getClass());
@@ -124,11 +125,10 @@ public class MyRequestService extends Service {
             builder = new Notification.Builder(context);
         }
 
-
         builder.setContentIntent(contentIntent)
                 .setSmallIcon(R.drawable.ic_sms_failed_black_24dp)
                 //.setTicker(res.getString(R.string.warning)) // текст в строке состояния
-                .setTicker("Последнее китайское предупреждение!")
+                .setTicker(mDataManager.getPreferensManager().getMessage())
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
                 //.setContentTitle(res.getString(R.string.notifytitle)) // Заголовок уведомления
