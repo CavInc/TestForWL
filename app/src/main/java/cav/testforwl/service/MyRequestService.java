@@ -125,7 +125,7 @@ public class MyRequestService extends Service {
         }
 
         builder.setContentIntent(contentIntent)
-                .setSmallIcon(R.drawable.ic_sms_failed_black_24dp)
+                .setSmallIcon(R.drawable.ic_announcement_black_24dp)
                 //.setTicker(res.getString(R.string.warning)) // текст в строке состояния
                 .setTicker(mDataManager.getPreferensManager().getMessage())
                 .setWhen(System.currentTimeMillis())

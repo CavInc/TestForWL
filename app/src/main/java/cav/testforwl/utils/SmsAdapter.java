@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 
 
-public class SmsAdapter extends ArrayAdapter {
+public class SmsAdapter extends ArrayAdapter{
     private LayoutInflater mInflater;
 
     public SmsAdapter(Context context, int resource, Object[] objects) {

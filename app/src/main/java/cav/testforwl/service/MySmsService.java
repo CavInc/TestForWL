@@ -46,7 +46,7 @@ public class MySmsService extends Service {
 
         Log.d(TAG,"SMS SERVICE START");
        // return super.onStartCommand(intent, flags, startId);
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
 
@@ -56,7 +56,11 @@ public class MySmsService extends Service {
         Log.d(TAG,"DESTROY");
     }
 
-    private void showNotification(){
+    private void stopMyServise(){
+        this.stopSelf();
+    }
+
+    private void showNotification(String sms_from,String sms_body){
         Context context = getApplicationContext();
         Intent smsActivity = new Intent(context, SmsActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context,0,smsActivity,0);
@@ -68,9 +72,11 @@ public class MySmsService extends Service {
             builder = new Notification.Builder(context);
         }
 
+
         builder.setContentIntent(contentIntent)
+                .setContentTitle(sms_from)
+                .setContentText(sms_body)
                 .setAutoCancel(true)
-                .setContentTitle("Rugball")
                 .setSmallIcon(R.drawable.ic_textsms_black_24dp);
 
         Notification notification;
@@ -102,8 +108,9 @@ public class MySmsService extends Service {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if (change_sms) {
-                showNotification();
+                showNotification(mSms_from,mSms_body);
             }
+            stopMyServise();
         }
 
         @Override
