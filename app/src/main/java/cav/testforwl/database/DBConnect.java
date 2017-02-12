@@ -77,7 +77,7 @@ public class DBConnect {
                         "(__id integer not null primary key autoincrement," +
                         "sms_address text," +
                         "sms_body text," +
-                        "smd_date text)");
+                        "sms_date text)");
             }
 
         }

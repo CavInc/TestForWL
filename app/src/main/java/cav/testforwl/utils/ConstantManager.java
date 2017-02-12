@@ -19,4 +19,5 @@ public interface ConstantManager {
     String SMS_FROM = "SMS_FROM";
     String SMS_BODY = "SMS_BODY";
     String SMS_DATE = "SMS_DATE";
+    String SMS_LOCK = "SMS_LOCK";
 }

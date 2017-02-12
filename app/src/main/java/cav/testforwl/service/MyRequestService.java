@@ -8,7 +8,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -100,7 +99,7 @@ public class MyRequestService extends Service {
                 if (isOnline()) {
                     new GetREST().get_data(deviceID);
                     Log.d(TAG, deviceID);
-                    sendNotification();
+                    showNotification();
                 }
             }
         }).start();
@@ -108,7 +107,7 @@ public class MyRequestService extends Service {
 
     private static final int NOTIFY_ID = 101;
 
-    private void sendNotification(){
+    private void showNotification(){
 
         Context context = getApplicationContext();
         Intent notificationIntent = new Intent(context, WebMessageActivity.class);

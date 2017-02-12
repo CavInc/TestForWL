@@ -53,6 +53,7 @@ public class MySMSReceiver extends BroadcastReceiver {
             mIntent.putExtra(ConstantManager.SMS_FROM,sms_from);
             mIntent.putExtra(ConstantManager.SMS_BODY,body);
             mIntent.putExtra(ConstantManager.SMS_DATE,sms_date);
+            mIntent.putExtra(ConstantManager.SMS_LOCK,mDataManager.getPreferensManager().isChangeSMS());
             context.startService(mIntent);
 
             Log.d(TAG, String.valueOf(mDataManager.getPreferensManager().isChangeSMS()));
