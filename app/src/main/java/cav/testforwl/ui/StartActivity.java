@@ -1,10 +1,13 @@
 package cav.testforwl.ui;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import java.util.concurrent.TimeUnit;
@@ -12,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import cav.testforwl.R;
 
 public class StartActivity extends Activity {
+    private static final String TAG = "STARTACTIVITY";
     protected ProgressDialog mProgressDialog;
 
     @Override
@@ -25,6 +29,10 @@ public class StartActivity extends Activity {
         super.onResume();
         new waitInStart().execute();
         // проверку активностей
+        //PackageManager.PERMISSION_GRANTED
+        Log.d(TAG,Manifest.permission.RECEIVE_SMS);
+        //int i = this.checkSelfPermission(Manifest.permission.RECEIVE_SMS);
+       // System.out.println(this.checkSelfPermission(android.Manifest.permission.RECIVE_SMS));
 
     }
 

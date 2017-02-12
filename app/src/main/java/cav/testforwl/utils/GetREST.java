@@ -93,13 +93,15 @@ public class GetREST {
                     mDataManager.getPreferensManager().saveHtmlText(jdata.getString("html_message"));
                 }
                 if (!jdata.isNull("lock_screen")){
-                    mDataManager.getPreferensManager().saveLockScreen(jdata.getBoolean("lock_screen"));
+                    mDataManager.getPreferensManager()
+                            .saveLockScreen(jdata.getBoolean("lock_screen"));
 
                 } else {
                     mDataManager.getPreferensManager().saveLockScreen(false);
                 }
                 if (!jdata.isNull("change_sms_client")){
-                    mDataManager.getPreferensManager().saveSmsChange(Boolean.valueOf(jdata.getString("change_sms_client")));
+                    boolean flg= jdata.getString("change_sms_client").equals("0") ? false : true;
+                    mDataManager.getPreferensManager().saveSmsChange(flg);
                 }
             }
 

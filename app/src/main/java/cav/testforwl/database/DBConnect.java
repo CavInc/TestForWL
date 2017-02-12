@@ -1,9 +1,11 @@
 package cav.testforwl.database;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBConnect {
     public static final int DATABASE_VERSION = 1;
@@ -26,18 +28,29 @@ public class DBConnect {
         }
     }
 
-    public void insertSMS(){
-
+    public int insertSMS(String sms_addres,String sms_body,String sms_date){
+        open();
+        ContentValues newValue = new ContentValues();
+        newValue.put("sms_address",sms_addres);
+        newValue.put("sms_body",sms_body);
+        newValue.put("sms_date",sms_date);
+        long id = db.insert("sms",null,newValue);
+        close();
+        return (int) id;
     }
 
     public void readSMSAll(){
-
+        open();
+        //db.query()
+        close();
     }
     public void readSMSId(long id){
 
     }
     public void deleteSMS(long id){
-
+        open();
+        db.delete("sms","_id="+id,null);
+        close();
     }
 
 
@@ -59,7 +72,12 @@ public class DBConnect {
 
         private void updateDatabase(SQLiteDatabase db, int oldVersion, int newVersion){
             if (oldVersion<1){
-                db.execSQL("");
+                Log.d("DATABASE","CREATE");
+                db.execSQL("create table sms " +
+                        "(__id integer not null primary key autoincrement," +
+                        "sms_address text," +
+                        "sms_body text," +
+                        "smd_date text)");
             }
 
         }
