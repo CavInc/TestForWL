@@ -5,5 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorBackground">#f1eef1</color>
+    <color name="reddivider">#FF0000</color>
+    <color name="graydivider">#a9a8a8</color>
 
 </resources>

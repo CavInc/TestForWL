@@ -110,7 +110,7 @@ public class MySmsService extends Service {
             if (change_sms) {
                 showNotification(mSms_from,mSms_body);
             }
-            stopMyServise();
+           // stopMyServise();
         }
 
         @Override
