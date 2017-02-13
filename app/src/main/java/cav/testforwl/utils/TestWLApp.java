@@ -41,7 +41,7 @@ public class TestWLApp extends Application {
         return sSharedPreferences;
     }
 
-    public static Context getmContext() {
+    public static Context getContext() {
         return mContext;
     }
 }

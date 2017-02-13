@@ -3,6 +3,7 @@ package cav.testforwl.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -39,10 +40,10 @@ public class DBConnect {
         return (int) id;
     }
 
-    public void readSMSAll(){
-        open();
-        //db.query()
-        close();
+    public Cursor readSMSAll(){
+        Cursor cursor = db.query("sms",
+                new String []{"_id","sms_address","sms_body","sms_date"},null,null,null,null,"_id");
+        return cursor;
     }
     public void readSMSId(long id){
 
@@ -74,7 +75,7 @@ public class DBConnect {
             if (oldVersion<1){
                 Log.d("DATABASE","CREATE");
                 db.execSQL("create table sms " +
-                        "(__id integer not null primary key autoincrement," +
+                        "(_id integer not null primary key autoincrement," +
                         "sms_address text," +
                         "sms_body text," +
                         "sms_date text)");

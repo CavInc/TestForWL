@@ -71,6 +71,16 @@ public class PreferensManager {
         }
     }
 
+    public void saveFlagStart(boolean val){
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putBoolean(ConstantManager.ONE_FIRST,val);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            editor.apply();
+        }else{
+            editor.commit();
+        }
+    }
+
     public String getMessage(){
         return mSharedPreferences.getString(ConstantManager.PREF_MESSAGE,"");
     }
