@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,14 @@ public class StartActivity extends Activity {
         Log.d(TAG,Manifest.permission.RECEIVE_SMS);
         //int i = this.checkSelfPermission(Manifest.permission.RECEIVE_SMS);
        // System.out.println(this.checkSelfPermission(android.Manifest.permission.RECIVE_SMS));
+        if (Build.VERSION.SDK_INT >= 23 ) {
+            int i = this.checkSelfPermission(Manifest.permission.RECEIVE_SMS);
+            if (i == PackageManager.PERMISSION_GRANTED) {
+                Log.d(TAG, "YES PERMISSION ");
+            } else {
+                Log.d(TAG, "NO PERMISSION");
+            }
+        }
 
     }
 
