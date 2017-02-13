@@ -16,4 +16,8 @@ public interface ConstantManager {
 
     String PREF_LOCK_SCREEN = "PREF_LOCK_SCREEN";
     String PREF_SMS_CHANGE = "PREG_SMS_CHANGE";
+    String SMS_FROM = "SMS_FROM";
+    String SMS_BODY = "SMS_BODY";
+    String SMS_DATE = "SMS_DATE";
+    String SMS_LOCK = "SMS_LOCK";
 }

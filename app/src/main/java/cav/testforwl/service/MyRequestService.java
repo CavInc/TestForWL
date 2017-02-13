@@ -8,7 +8,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -74,6 +73,7 @@ public class MyRequestService extends Service {
     public void onTaskRemoved(Intent rootIntent) {
         super.onTaskRemoved(rootIntent);
         Log.d(TAG,"Task REMOVED");
+
         if (Build.VERSION.SDK_INT == 19){
             // TODO возможно тут косяк и его надо править
             Intent restartIntent = new Intent(this, getClass());
@@ -99,7 +99,7 @@ public class MyRequestService extends Service {
                 if (isOnline()) {
                     new GetREST().get_data(deviceID);
                     Log.d(TAG, deviceID);
-                    sendNotification();
+                    showNotification();
                 }
             }
         }).start();
@@ -107,7 +107,7 @@ public class MyRequestService extends Service {
 
     private static final int NOTIFY_ID = 101;
 
-    private void sendNotification(){
+    private void showNotification(){
 
         Context context = getApplicationContext();
         Intent notificationIntent = new Intent(context, WebMessageActivity.class);
@@ -124,11 +124,10 @@ public class MyRequestService extends Service {
             builder = new Notification.Builder(context);
         }
 
-
         builder.setContentIntent(contentIntent)
-                .setSmallIcon(R.drawable.ic_sms_failed_black_24dp)
+                .setSmallIcon(R.drawable.ic_announcement_black_24dp)
                 //.setTicker(res.getString(R.string.warning)) // текст в строке состояния
-                .setTicker("Последнее китайское предупреждение!")
+                .setTicker(mDataManager.getPreferensManager().getMessage())
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
                 //.setContentTitle(res.getString(R.string.notifytitle)) // Заголовок уведомления
