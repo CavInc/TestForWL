@@ -1,3 +1,4 @@
+
 package cav.testforwl.utils;
 
 
@@ -76,6 +77,10 @@ public class PreferensManager {
 
     public Boolean isRegistry(){
         return mSharedPreferences.getBoolean(ConstantManager.REGISTRY_BASE,false);
+    }
+
+    public Boolean isChangeSMS(){
+        return mSharedPreferences.getBoolean(ConstantManager.PREF_SMS_CHANGE,false);
     }
 
 
