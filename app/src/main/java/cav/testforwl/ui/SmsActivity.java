@@ -70,6 +70,7 @@ public class SmsActivity extends Activity implements View.OnClickListener {
             delBtn.setVisibility(View.GONE);
             mItem = null;
             mSelView.setBackgroundResource(android.R.color.white);
+            select_del = false;
         }else {
             super.onBackPressed();
         }

@@ -41,7 +41,7 @@ public class MySMSReceiver extends BroadcastReceiver {
                 Log.d(TAG,messages[i].getDisplayMessageBody());
             }
             String sms_from = messages[0].getDisplayOriginatingAddress();
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             String sms_date = format.format(messages[0].getTimestampMillis());
             Log.d(TAG,sms_date);
             StringBuilder bodyText = new StringBuilder();

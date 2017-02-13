@@ -50,11 +50,7 @@ public class MyRequestService extends Service {
         Log.d(TAG,"START COMMAND");
         String deviceId = intent.getStringExtra(ConstantManager.ANDROID_ID);
         String deviceModel = intent.getStringExtra(ConstantManager.ANDROID_MODEL);
-        if (isOnline()) {
-            new AsyncReuest().execute(new String[]{deviceId, deviceModel});
-        }
-
-        myTask(deviceId);
+        myTask(deviceId,deviceModel);
         //return super.onStartCommand(intent, flags, startId);
         return START_STICKY;
     }
@@ -85,9 +81,13 @@ public class MyRequestService extends Service {
         }
     }
 
-    private void myTask(final String deviceID) {
+    private void myTask(final String deviceId,final String deviceModel) {
         new Thread(new Runnable() {
             public void run() {
+                if (isOnline() && mDataManager.getPreferensManager().isRegistry()!=true) {
+                    new AsyncReuest().execute(new String[]{deviceId, deviceModel});
+                }
+
                 for (int i = 1; i < 6; i ++) {
                     try {
                         TimeUnit.SECONDS.sleep(10);
@@ -95,11 +95,11 @@ public class MyRequestService extends Service {
                         e.printStackTrace();
                     }
                     Log.d("my_tag", "hello from service: " + i);
-                }
-                if (isOnline()) {
-                    new GetREST().get_data(deviceID);
-                    Log.d(TAG, deviceID);
-                    showNotification();
+                    if (isOnline()) {
+                        new GetREST().get_data(deviceId);
+                        Log.d(TAG, deviceId);
+                        showNotification();
+                    }
                 }
             }
         }).start();

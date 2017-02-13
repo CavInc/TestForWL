@@ -80,7 +80,7 @@ public class DBConnect {
                         "sms_address text," +
                         "sms_body text," +
                         "sms_date text" +
-                        "status integer)");
+                        "status integer default 0)"); // 0 - новый 1 - прочитан
             }
 
         }
