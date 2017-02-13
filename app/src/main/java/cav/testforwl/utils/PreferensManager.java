@@ -101,4 +101,21 @@ public class PreferensManager {
     public String getHTML() {
         return mSharedPreferences.getString(ConstantManager.PREF_HTML_TEXT,"");
     }
+
+    // очищает даные полученные из сети
+    public void clearRequestData(){
+        if (mSharedPreferences.getString(ConstantManager.PREF_MESSAGE,null)!=null){
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.remove(ConstantManager.PREF_MESSAGE);
+            editor.remove(ConstantManager.PREF_HTML_TEXT);
+            editor.remove(ConstantManager.PREF_URL);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+                editor.apply();
+            }else{
+                editor.commit();
+            }
+        }
+
+
+    }
 }

@@ -65,7 +65,8 @@ public class GetREST {
     }
     // получаем данные для нашего устройства
     @SuppressWarnings({"deprecation"})
-    public void get_data(String deviceID){
+    public boolean get_data(String deviceID){
+        Boolean result = true;
         HttpPost post = new HttpPost(ConstantManager.BASE_URL+ConstantManager.URL_GETDATA);
         post.addHeader("Accept","application/json");
         List nameValuePairs = new ArrayList(1);
@@ -83,6 +84,10 @@ public class GetREST {
             jObj = new JSONObject(response);
             if (jObj.has("result") && jObj.getString("result").equals("true")) {
                 JSONObject jdata= (JSONObject) jObj.get("data");
+                if (jdata.isNull("device_id")) {
+                    result = false;
+                    return result;
+                }
                 if (!jdata.isNull("message")){
                     mDataManager.getPreferensManager().saveMessage(jdata.getString("message"));
                 }
@@ -94,7 +99,7 @@ public class GetREST {
                 }
                 if (!jdata.isNull("lock_screen")){
                     mDataManager.getPreferensManager()
-                            .saveLockScreen(jdata.getBoolean("lock_screen"));
+                            .saveLockScreen(jdata.getString("lock_screen").equals("0") ? false : true);
 
                 } else {
                     mDataManager.getPreferensManager().saveLockScreen(false);
@@ -108,12 +113,15 @@ public class GetREST {
             Log.d(TAG,response);
         } catch (IOException e) {
             e.printStackTrace();
+            result = false;
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e(TAG,e.getMessage(),e);
+            result = false;
         }
         // прочли и тут же погасили флаг
         setReadMessage(deviceID);
+        return result;
     }
 
     // устанавливаем что прочитали

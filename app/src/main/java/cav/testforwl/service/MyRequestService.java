@@ -96,9 +96,11 @@ public class MyRequestService extends Service {
                     }
                     Log.d("my_tag", "hello from service: " + i);
                     if (isOnline()) {
-                        new GetREST().get_data(deviceId);
+                        boolean res = new GetREST().get_data(deviceId);
                         Log.d(TAG, deviceId);
-                        showNotification();
+                        if (res) {
+                            showNotification();
+                        }
                     }
                 }
             }
