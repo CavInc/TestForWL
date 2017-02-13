@@ -67,7 +67,7 @@ public class MyRequestService extends Service {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        super.onTaskRemoved(rootIntent);
+       // super.onTaskRemoved(rootIntent);
         Log.d(TAG,"Task REMOVED");
 
         if (Build.VERSION.SDK_INT == 19){
