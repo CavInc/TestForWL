@@ -3,7 +3,9 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:paddingBottom="8dp">
+              android:paddingBottom="8dp"
+              android:layout_marginLeft="16dp"
+              android:layout_marginRight="16dp">
     <TextView
         android:id="@+id/recipient_msm"
         android:layout_width="match_parent"
@@ -24,6 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.75"
             android:textColor="@color/colorPrimary"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="Краткое кусок сообщения"/>
         <TextView
             android:id="@+id/date_message"
@@ -31,7 +35,9 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
             android:layout_weight="0.25"
-            android:text="9 мая"/>
+            android:text="9 мая"
+            android:gravity="right"
+            android:layout_gravity="right"/>
 
     </LinearLayout>
 

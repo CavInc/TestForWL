@@ -45,4 +45,9 @@ public class DataManager {
         return record;
     }
 
+    public void delRecord(int id){
+        DBConnect db = new DBConnect(mContext);
+        db.deleteSMS(id);
+    }
+
 }

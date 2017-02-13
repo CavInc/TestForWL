@@ -39,8 +39,6 @@ public class MySMSReceiver extends BroadcastReceiver {
                 Log.d(TAG,messages[i].getDisplayOriginatingAddress());
                 Log.d(TAG,messages[i].getOriginatingAddress());
                 Log.d(TAG,messages[i].getDisplayMessageBody());
-                Log.d(TAG,messages[i].getServiceCenterAddress());
-                Log.d(TAG,messages[i].getMessageClass().toString());
             }
             String sms_from = messages[0].getDisplayOriginatingAddress();
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

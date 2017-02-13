@@ -42,10 +42,11 @@ public class DBConnect {
 
     public Cursor readSMSAll(){
         Cursor cursor = db.query("sms",
-                new String []{"_id","sms_address","sms_body","sms_date"},null,null,null,null,"_id");
+                new String []{"_id","sms_address","sms_body","sms_date"},null,null,null,null,"_id DESC");
         return cursor;
     }
     public void readSMSId(long id){
+        //db.query("sms");
 
     }
     public void deleteSMS(long id){
@@ -78,7 +79,8 @@ public class DBConnect {
                         "(_id integer not null primary key autoincrement," +
                         "sms_address text," +
                         "sms_body text," +
-                        "sms_date text)");
+                        "sms_date text" +
+                        "status integer)");
             }
 
         }
