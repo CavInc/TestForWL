@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import cav.testforwl.R;
 
 public class StartActivity extends Activity {
     private static final String TAG = "STARTACTIVITY";
+    private static final int PERMISSION_REQUEST_CODE = 1001;
     protected ProgressDialog mProgressDialog;
 
     @Override
@@ -42,6 +44,9 @@ public class StartActivity extends Activity {
                 Log.d(TAG, "YES PERMISSION ");
             } else {
                 Log.d(TAG, "NO PERMISSION");
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.RECEIVE_SMS,
+                        Manifest.permission.READ_CONTACTS},PERMISSION_REQUEST_CODE);
             }
         }
 
@@ -49,6 +54,14 @@ public class StartActivity extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_CODE && grantResults.length == 2) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // если получили права
+            }
+            if (grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+
+            }
+        }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
