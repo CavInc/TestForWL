@@ -101,7 +101,7 @@ public class MyRequestService extends Service {
                         boolean res = new GetREST().get_data(deviceId);
                         Log.d(TAG, deviceId);
                         if (res) {
-                            //changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
+                           // changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
                             showNotification();
                         }
                     }
@@ -120,7 +120,7 @@ public class MyRequestService extends Service {
             if (!Telephony.Sms.getDefaultSmsPackage(this).equals(myPackageName)) {
                 Log.d(TAG,"ТИПА НЕ ДЕФОЛТ");
                 Context context = getApplicationContext();
-                Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT));
+                Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
                 intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME,myPackageName);
                 startActivity(intent);
                 //sendBroadcast(intent);
