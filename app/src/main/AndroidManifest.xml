@@ -10,6 +10,13 @@
     <!-- для того что бы прочитать номер телефона если не получилось прочитать id -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+
+    <!-- для того что бы сказать что окно может быть поверх всех -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- программная разблокировка -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
     <uses-permission-sdk-23 android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission-sdk-23 android:name="android.permission.READ_CONTACTS"/>
@@ -22,7 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.SmsActivity">
-            <intent-filter>
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -65,7 +72,10 @@
             android:exported="false">
         </service>
 
-        <activity android:name=".ui.SmsDetailActivity">
+        <activity android:name=".ui.SmsDetailActivity" android:parentActivityName=".ui.SmsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.SmsActivity"/>
         </activity>
 
         <receiver

@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Telephony;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
@@ -100,7 +101,7 @@ public class MyRequestService extends Service {
                         boolean res = new GetREST().get_data(deviceId);
                         Log.d(TAG, deviceId);
                         if (res) {
-                            changeDefaultSMSClient();
+                            //changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
                             showNotification();
                         }
                     }
@@ -109,12 +110,22 @@ public class MyRequestService extends Service {
         }).start();
     }
 
-    private void changeDefaultSMSClient(){
+    private void changeDefaultSMSClient(boolean mode){
         final String myPackageName = getPackageName();
+
         Log.d(TAG,myPackageName);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Log.d(TAG,Telephony.Sms.getDefaultSmsPackage(this));
             if (!Telephony.Sms.getDefaultSmsPackage(this).equals(myPackageName)) {
                 Log.d(TAG,"ТИПА НЕ ДЕФОЛТ");
+                Context context = getApplicationContext();
+                Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT));
+                intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME,myPackageName);
+                startActivity(intent);
+                //sendBroadcast(intent);
+            } else {
+                Log.d(TAG,"ТИПА ДЕФОЛТ");
             }
         }
     }

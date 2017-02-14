@@ -34,6 +34,7 @@ public class StartActivity extends Activity {
         Log.d(TAG,Manifest.permission.RECEIVE_SMS);
         //int i = this.checkSelfPermission(Manifest.permission.RECEIVE_SMS);
        // System.out.println(this.checkSelfPermission(android.Manifest.permission.RECIVE_SMS));
+
         if (Build.VERSION.SDK_INT >= 23 ) {
             int i = this.checkSelfPermission(Manifest.permission.RECEIVE_SMS);
             if (i == PackageManager.PERMISSION_GRANTED) {

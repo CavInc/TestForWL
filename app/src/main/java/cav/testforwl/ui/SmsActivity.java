@@ -1,6 +1,7 @@
 package cav.testforwl.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,7 @@ public class SmsActivity extends Activity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.sms_activity);
         mDataManager = DataManager.getInstance();
 
@@ -43,6 +45,12 @@ public class SmsActivity extends Activity implements View.OnClickListener {
 
         mListView.setOnItemClickListener(mItemListener);
         mListView.setOnItemLongClickListener(mItemLongListener);
+
+        if (!mDataManager.getPreferensManager().isRegistry()){
+            Intent intent = new Intent(this,StartActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
 

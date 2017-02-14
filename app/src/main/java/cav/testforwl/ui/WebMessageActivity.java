@@ -5,6 +5,7 @@ import android.app.ActivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,6 +27,8 @@ public class WebMessageActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webmessage_activity);
+        getWindow().setFlags(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+
 
         mWebView = (WebView) findViewById(R.id.webView);
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -34,8 +37,12 @@ public class WebMessageActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
             mWebView.getSettings().setDisplayZoomControls(false);
         }
-        mWebView.setWebViewClient(new WebViewClient());
-        mWebView.setWebChromeClient(new WebChromeClient());
+        mWebView.setWebViewClient(new WebViewClient(
+
+        ));
+        mWebView.setWebChromeClient(new WebChromeClient(
+
+        ));
 
         mWebView.getSettings().setDefaultTextEncodingName("utf-8");
 
