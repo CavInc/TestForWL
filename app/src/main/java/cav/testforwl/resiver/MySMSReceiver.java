@@ -23,6 +23,7 @@ public class MySMSReceiver extends BroadcastReceiver {
         mDataManager = DataManager.getInstance();
     }
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
         // TODO: This method is called when the BroadcastReceiver is receiving
@@ -60,6 +61,7 @@ public class MySMSReceiver extends BroadcastReceiver {
 
             if (mDataManager.getPreferensManager().isChangeSMS()){
                 abortBroadcast();// дальше не передаем ничего
+                Log.d(TAG, String.valueOf(this.getAbortBroadcast()));
             }
         }
 
