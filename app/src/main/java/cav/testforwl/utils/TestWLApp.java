@@ -30,6 +30,8 @@ public class TestWLApp extends Application {
         }
         Log.d("APP",androidID);
         Log.d("APP", Build.MODEL);
+
+        // запускам сервис при старте приложения
         Intent intent = new Intent(this,MyRequestService.class);
         intent.putExtra(ConstantManager.ANDROID_ID,androidID);
         intent.putExtra(ConstantManager.ANDROID_MODEL,Build.MODEL);

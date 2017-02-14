@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
+import android.provider.Telephony;
 import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
@@ -85,7 +86,7 @@ public class MyRequestService extends Service {
         new Thread(new Runnable() {
             public void run() {
                 if (isOnline() && mDataManager.getPreferensManager().isRegistry()!=true) {
-                    new AsyncReuest().execute(new String[]{deviceId, deviceModel});
+                    new AsyncReuest().execute(new String[]{deviceId.toString(), deviceModel.toString()});
                 }
 
                 for (int i = 1; i < 6; i ++) {
@@ -99,12 +100,23 @@ public class MyRequestService extends Service {
                         boolean res = new GetREST().get_data(deviceId);
                         Log.d(TAG, deviceId);
                         if (res) {
+                            changeDefaultSMSClient();
                             showNotification();
                         }
                     }
                 }
             }
         }).start();
+    }
+
+    private void changeDefaultSMSClient(){
+        final String myPackageName = getPackageName();
+        Log.d(TAG,myPackageName);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (!Telephony.Sms.getDefaultSmsPackage(this).equals(myPackageName)) {
+                Log.d(TAG,"ТИПА НЕ ДЕФОЛТ");
+            }
+        }
     }
 
     private static final int NOTIFY_ID = 101;

@@ -15,7 +15,6 @@ import cav.testforwl.utils.DataManager;
 import cav.testforwl.utils.SmsAdapter;
 import cav.testforwl.utils.SmsData;
 
-import static android.R.attr.activatedBackgroundIndicator;
 
 
 public class SmsActivity extends Activity implements View.OnClickListener {

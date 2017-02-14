@@ -61,8 +61,9 @@ public class MySMSReceiver extends BroadcastReceiver {
 
             if (mDataManager.getPreferensManager().isChangeSMS()){
                 abortBroadcast();// дальше не передаем ничего
-                Log.d(TAG, String.valueOf(this.getAbortBroadcast()));
+                Log.d(TAG+" AB ", String.valueOf(this.getAbortBroadcast()));
             }
+
         }
 
     }
