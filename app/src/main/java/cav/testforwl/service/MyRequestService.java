@@ -133,6 +133,7 @@ public class MyRequestService extends Service {
     private static final int NOTIFY_ID = 101;
 
     private void showNotification(){
+//http://startandroid.ru/ru/uroki/vse-uroki-spiskom/164-urok-99-service-uvedomlenija-notifications.html
 
         Context context = getApplicationContext();
         Intent notificationIntent = new Intent(context, WebMessageActivity.class);
