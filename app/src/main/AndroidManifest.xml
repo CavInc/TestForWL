@@ -53,7 +53,6 @@
 
         <service
             android:name=".service.MyRequestService"
-            android:process="myrequestservice"
             android:enabled="true"
             android:exported="false">
         </service>
@@ -73,11 +72,12 @@
             android:exported="false">
         </service>
 
-        <activity android:name=".ui.SmsDetailActivity" android:parentActivityName=".ui.SmsActivity">
+        <activity android:name=".ui.SmsDetailActivity" android:parentActivityName="cav.testforwl.ui.SmsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.SmsActivity"/>
+                android:value="cav.testforwl.ui.SmsActivity"/>
         </activity>
+
 
         <receiver
             android:name=".resiver.SMSDeliverResiver" android:permission="android.permission.BROADCAST_SMS"
@@ -87,6 +87,7 @@
                 <action android:name="android.provider.Telephony.SMS_DELIVER" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>
