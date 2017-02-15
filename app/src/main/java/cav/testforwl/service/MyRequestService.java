@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Telephony;
+import android.support.v4.app.NotificationCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -143,13 +144,48 @@ public class MyRequestService extends Service {
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, notificationIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
-        Resources res = context.getResources();
+
+        NotificationManager notificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
 
 
+        Notification notification;
+
+        // блин несколько кривовато
+        if (Build.VERSION.SDK_INT < 11) {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+            builder.setContentIntent(contentIntent)
+                    .setSmallIcon(R.drawable.ic_announcement_black_24dp)
+                    .setTicker(mDataManager.getPreferensManager().getMessage())
+                    .setWhen(System.currentTimeMillis())
+                    .setAutoCancel(true)
+                    .setContentTitle("Важное сообщение!")
+                    .setContentText(mDataManager.getPreferensManager().getMessage()); // Текст уведомления;
+                notification = builder.getNotification(); // до API 16
+        } else {
+            Notification.Builder builder = new Notification.Builder(context);
+            builder.setContentIntent(contentIntent)
+                    .setSmallIcon(R.drawable.ic_announcement_black_24dp)
+                    .setTicker(mDataManager.getPreferensManager().getMessage())
+                    .setWhen(System.currentTimeMillis())
+                    .setAutoCancel(true)
+                    .setContentTitle("Важное сообщение!")
+                    .setContentText(mDataManager.getPreferensManager().getMessage()); // Текст уведомления;
+            if (Build.VERSION.SDK_INT < 16) {
+                notification = builder.getNotification(); // до API 16
+            } else {
+                notification = builder.build();
+            }
+        }
+
+        notificationManager.notify(NOTIFY_ID, notification);
+
+
+/*
         Notification.Builder builder;
 
         if (Build.VERSION.SDK_INT < 11) {
-            builder = new Notification.Builder(context);
+            NotificationCompat.Builder builder1 = new NotificationCompat.Builder(context);
         }else {
             builder = new Notification.Builder(context);
         }
@@ -173,9 +209,9 @@ public class MyRequestService extends Service {
             notification = builder.build();
         }
 
-        NotificationManager notificationManager = (NotificationManager) context
-                .getSystemService(Context.NOTIFICATION_SERVICE);
+
         notificationManager.notify(NOTIFY_ID, notification);
+        */
     }
 
     // проверяем включен ли интернетик
