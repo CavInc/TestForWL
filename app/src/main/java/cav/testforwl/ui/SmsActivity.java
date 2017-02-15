@@ -12,9 +12,11 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import cav.testforwl.R;
+import cav.testforwl.utils.ConstantManager;
 import cav.testforwl.utils.DataManager;
 import cav.testforwl.utils.SmsAdapter;
 import cav.testforwl.utils.SmsData;
+import cav.testforwl.ui.SmsDetailActivity;
 
 
 
@@ -83,6 +85,14 @@ public class SmsActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    private void viewDetial(){
+        Intent intent =new Intent (this,SmsDetailActivity.class);
+        intent.putExtra(ConstantManager.SMS_FROM,mItem.getSms_from());
+        intent.putExtra(ConstantManager.SMS_BODY,mItem.getSms_body());
+        intent.putExtra(ConstantManager.SMS_DATE,mItem.getSms_data());
+        startActivity(intent);
+    }
+
     AdapterView.OnItemLongClickListener mItemLongListener = new AdapterView.OnItemLongClickListener(){
 
         @Override
@@ -99,7 +109,8 @@ public class SmsActivity extends Activity implements View.OnClickListener {
     AdapterView.OnItemClickListener mItemListener = new AdapterView.OnItemClickListener(){
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
+            mItem = adapter.getItem(position);
+            viewDetial();
         }
     };
 

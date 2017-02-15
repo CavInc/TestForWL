@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TestForWL</string>
     <string name="start_message">СТАРТ</string>
+    <string name="sms_detail_recived">Получено:</string>
 </resources>

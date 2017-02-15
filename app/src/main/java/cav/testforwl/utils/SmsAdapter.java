@@ -41,7 +41,7 @@ public class SmsAdapter extends ArrayAdapter<SmsData>{
         SmsData data = getItem(position);
         holder.resipientSMS.setText(data.getSms_from());
         holder.shortSMS.setText(data.getSms_body());
-        holder.dataSMS.setText(data.getSms_data());
+        holder.dataSMS.setText(Func.getHumanDate(data.getSms_data()));
         return row;
         //return super.getView(position, convertView, parent);
     }
