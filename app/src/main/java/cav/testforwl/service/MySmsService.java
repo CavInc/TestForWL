@@ -1,5 +1,6 @@
 package cav.testforwl.service;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import cav.testforwl.R;
@@ -22,6 +24,15 @@ import cav.testforwl.utils.ConstantManager;
 
 public class MySmsService extends Service {
     private static final String TAG = "MYSMS-SERVICE";
+
+    @SuppressLint("InlinedApi")
+    private final static String[] FROM_COLUMNS = {
+            Build.VERSION.SDK_INT
+                    >= Build.VERSION_CODES.HONEYCOMB ?
+                    ContactsContract.Contacts.DISPLAY_NAME_PRIMARY :
+                    ContactsContract.Contacts.DISPLAY_NAME
+    };
+
 
     private Boolean change_sms = false;
 

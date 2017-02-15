@@ -87,7 +87,10 @@ public class MyRequestService extends Service {
         new Thread(new Runnable() {
             public void run() {
                 if (isOnline() && mDataManager.getPreferensManager().isRegistry()!=true) {
-                    new AsyncReuest().execute(new String[]{deviceId.toString(), deviceModel.toString()});
+                    Log.d(TAG+" 2.0 ",deviceId);
+                    Log.d(TAG+" 2.0 ",deviceModel);
+                    //new AsyncReuest(deviceId,deviceModel).execute();
+                    new GetREST().registry(deviceId,deviceModel);
                 }
 
                 for (int i = 1; i < 6; i ++) {
@@ -142,6 +145,7 @@ public class MyRequestService extends Service {
                 PendingIntent.FLAG_CANCEL_CURRENT);
         Resources res = context.getResources();
 
+
         Notification.Builder builder;
 
         if (Build.VERSION.SDK_INT < 11) {
@@ -181,13 +185,20 @@ public class MyRequestService extends Service {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    class AsyncReuest extends AsyncTask<String[],Void,Void> {
+    class AsyncReuest extends AsyncTask<Void,Void,Void> {
+        private String deviceId;
+        private String deviceModel;
+
+        public AsyncReuest(String deviceId,String deviceModel){
+            this.deviceId = deviceId;
+            this.deviceModel = deviceModel;
+        }
 
         @Override
-        protected Void doInBackground(String[]... strings) {
+        protected Void doInBackground(Void... strings) {
             Log.d(TAG,"START HTTP");
 
-            new GetREST().registry(String.valueOf(strings[0][0]),String.valueOf(strings[0][1]));
+            new GetREST().registry(deviceId,deviceModel);
             return null;
         }
 
