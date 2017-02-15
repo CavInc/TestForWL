@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.ContactsContract;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import cav.testforwl.R;
@@ -76,6 +77,31 @@ public class MySmsService extends Service {
         Intent smsActivity = new Intent(context, SmsActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context,0,smsActivity,0);
 
+        NotificationManager notificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        builder.setContentIntent(contentIntent)
+                .setTicker(sms_from)
+                .setContentTitle(sms_from)
+                .setContentText(sms_body)
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_textsms_black_24dp);
+
+        Notification notification;
+        if (Build.VERSION.SDK_INT < 11) {
+            notification = builder.getNotification();
+        } else {
+            notification = builder.build();
+        }
+
+        notification.defaults = Notification.DEFAULT_SOUND;
+
+        /*
+        notification.defaults = Notification.DEFAULT_SOUND |
+                Notification.DEFAULT_VIBRATE;
+        */
+        /*
         Notification.Builder builder ;
         if (Build.VERSION.SDK_INT < 11) {
             builder = new Notification.Builder(context);
@@ -98,8 +124,7 @@ public class MySmsService extends Service {
             notification = builder.build();
         }
 
-        NotificationManager notificationManager = (NotificationManager) context
-                .getSystemService(Context.NOTIFICATION_SERVICE);
+        */
         notificationManager.notify(R.drawable.ic_textsms_black_24dp, notification);
 
     }
