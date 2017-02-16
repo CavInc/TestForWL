@@ -8,6 +8,7 @@ import android.content.Intent;
 public class RebootResiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        // TODO запуск сервисов после перезагрузки если он не запущен
 
     }
 }

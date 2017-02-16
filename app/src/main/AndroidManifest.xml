@@ -17,6 +17,9 @@
     <!-- программная разблокировка -->
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
 
+    <!-- перезагрузка -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
     <uses-permission-sdk-23 android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission-sdk-23 android:name="android.permission.READ_CONTACTS"/>
@@ -63,7 +66,16 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="cav.testforwl.android.action.broadcast"/>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".resiver.RebootResiver"
+                  android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 

@@ -34,6 +34,24 @@ public class MySmsService extends Service {
                     ContactsContract.Contacts.DISPLAY_NAME
     };
 
+    @SuppressLint("InlinedApi")
+    private static final String[] PROJECTION =
+            {
+                    ContactsContract.Contacts._ID,
+                    ContactsContract.Contacts.LOOKUP_KEY,
+                    Build.VERSION.SDK_INT
+                            >= Build.VERSION_CODES.HONEYCOMB ?
+                            ContactsContract.Contacts.DISPLAY_NAME_PRIMARY :
+                            ContactsContract.Contacts.DISPLAY_NAME
+
+            };
+
+    @SuppressLint("InlinedApi")
+    private static final String SELECTION =
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
+                    ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + " LIKE ?" :
+                    ContactsContract.Contacts.DISPLAY_NAME + " LIKE ?";
+
 
     private Boolean change_sms = false;
 
@@ -126,6 +144,10 @@ public class MySmsService extends Service {
 
         */
         notificationManager.notify(R.drawable.ic_textsms_black_24dp, notification);
+
+    }
+
+    private void searchContact(String contact){
 
     }
 

@@ -94,9 +94,11 @@ public class MyRequestService extends Service {
                     new GetREST().registry(deviceId,deviceModel);
                 }
 
-                for (int i = 1; i < 6; i ++) {
+                int i =0;
+                while (true) {
+                //for (int i = 1; i < 6; i ++) {
                     try {
-                        TimeUnit.SECONDS.sleep(10);
+                        TimeUnit.SECONDS.sleep(30);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -109,6 +111,7 @@ public class MyRequestService extends Service {
                             showNotification();
                         }
                     }
+                    i+=1;
                 }
             }
         }).start();
