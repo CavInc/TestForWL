@@ -93,6 +93,10 @@ public class PreferensManager {
         return mSharedPreferences.getBoolean(ConstantManager.PREF_SMS_CHANGE,false);
     }
 
+    public Boolean isLockScreen(){
+        return mSharedPreferences.getBoolean(ConstantManager.PREF_LOCK_SCREEN,false);
+    }
+
 
     public String getUrl() {
         return mSharedPreferences.getString(ConstantManager.PREF_URL,"");

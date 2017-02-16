@@ -27,6 +27,10 @@ public class WebMessageActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webmessage_activity);
+        mDataManager=DataManager.getInstance();
+        if (mDataManager.getPreferensManager().isLockScreen()) {
+            Log.d(TAG,"LOCK SCREEN");
+        }
 
         getWindow().setFlags(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 
@@ -47,7 +51,7 @@ public class WebMessageActivity extends Activity {
 
         mWebView.getSettings().setDefaultTextEncodingName("utf-8");
 
-        mDataManager=DataManager.getInstance();
+
     }
 
     @Override
@@ -64,6 +68,12 @@ public class WebMessageActivity extends Activity {
                     + rsi.service.getClassName());
         }
         */
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!mDataManager.getPreferensManager().isLockScreen())
+            super.onBackPressed();
     }
 
     @Override
