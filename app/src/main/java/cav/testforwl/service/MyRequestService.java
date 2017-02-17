@@ -108,7 +108,17 @@ public class MyRequestService extends Service {
                         Log.d(TAG, deviceId);
                         if (res) {
                            // changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
-                            showNotification();
+                            if (!mDataManager.getPreferensManager().isLockScreen()) {
+                                Context context = getApplicationContext();
+                                if (WebMessageActivity.sWebMessageActivity!=null)
+                                    WebMessageActivity.sWebMessageActivity.finish();
+                                showNotification();
+                            } else  {
+                                Context context = getApplicationContext();
+                                Intent intent = new Intent(context, WebMessageActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
                         }
                     }
                     i+=1;
@@ -128,6 +138,7 @@ public class MyRequestService extends Service {
                 Log.d(TAG,"ТИПА НЕ ДЕФОЛТ");
                 Context context = getApplicationContext();
                 Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME,myPackageName);
                 startActivity(intent);
                 //sendBroadcast(intent);

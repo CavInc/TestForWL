@@ -23,16 +23,16 @@ public class WebMessageActivity extends Activity {
 
     private WebView mWebView;
 
+    public static WebMessageActivity sWebMessageActivity;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webmessage_activity);
-        mDataManager=DataManager.getInstance();
-        if (mDataManager.getPreferensManager().isLockScreen()) {
-            Log.d(TAG,"LOCK SCREEN");
-        }
 
-        getWindow().setFlags(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        sWebMessageActivity = this;
+
+        mDataManager=DataManager.getInstance();
 
 
         mWebView = (WebView) findViewById(R.id.webView);
@@ -57,6 +57,12 @@ public class WebMessageActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG,"WEB RESUME");
+        if (mDataManager.getPreferensManager().isLockScreen()) {
+            Log.d(TAG,"LOCK SCREEN");
+            getWindow().setFlags(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        }
+
         /*
         ActivityManager am = (ActivityManager) this
                 .getSystemService(ACTIVITY_SERVICE);

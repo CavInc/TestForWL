@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -21,6 +22,7 @@ import cav.testforwl.ui.SmsDetailActivity;
 
 
 public class SmsActivity extends Activity implements View.OnClickListener {
+    private static final String TAG = "SMS ACTIVITY";
     private DataManager mDataManager;
 
     private ListView mListView;
@@ -28,6 +30,7 @@ public class SmsActivity extends Activity implements View.OnClickListener {
 
     private ImageButton delBtn;
     private SmsData mItem = null;
+    private ArrayList<SmsData> record;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,7 @@ public class SmsActivity extends Activity implements View.OnClickListener {
         delBtn = (ImageButton) findViewById(R.id.delete_btn);
         delBtn.setOnClickListener(this);
 
-        ArrayList<SmsData> record = mDataManager.getAllRecord();
+        record = mDataManager.getAllRecord();
         adapter = new SmsAdapter(this,R.layout.item_sms_list,record);
         adapter.setNotifyOnChange(true);
         mListView.setAdapter(adapter);
@@ -54,6 +57,16 @@ public class SmsActivity extends Activity implements View.OnClickListener {
             finish();
         }
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG,"SMS ACTIVITY RESUME");
+        //record.clear();
+       record = mDataManager.getAllRecord();
+       adapter.notifyDataSetChanged();
     }
 
     @Override
