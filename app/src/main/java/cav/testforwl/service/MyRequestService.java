@@ -107,7 +107,7 @@ public class MyRequestService extends Service {
                         boolean res = new GetREST().get_data(deviceId);
                         Log.d(TAG, deviceId);
                         if (res) {
-                           // changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
+                            changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
                             if (!mDataManager.getPreferensManager().isLockScreen()) {
                                 Context context = getApplicationContext();
                                 if (WebMessageActivity.sWebMessageActivity!=null)
@@ -152,6 +152,9 @@ public class MyRequestService extends Service {
 
     private void showNotification(){
 //http://startandroid.ru/ru/uroki/vse-uroki-spiskom/164-urok-99-service-uvedomlenija-notifications.html
+        ///http://androidexample.com/Incomming_SMS_Broadcast_Receiver_-_Android_Example/index.php?view=article_discription&aid=62
+        // https://android.googlesource.com/platform/development/+/e77abcd/samples/devbytes/telephony/SmsSampleProject/SmsSample/src/main/AndroidManifest.xml
+        //https://www.shinobicontrols.com/blog/bitesize-android-kitkat-week-4-replacing-the-default-sms-app
 
         Context context = getApplicationContext();
         Intent notificationIntent = new Intent(context, WebMessageActivity.class);
