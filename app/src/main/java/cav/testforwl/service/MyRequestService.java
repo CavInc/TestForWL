@@ -109,7 +109,6 @@ public class MyRequestService extends Service {
                         if (res) {
                             changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
                             if (!mDataManager.getPreferensManager().isLockScreen()) {
-                                Context context = getApplicationContext();
                                 if (WebMessageActivity.sWebMessageActivity!=null)
                                     WebMessageActivity.sWebMessageActivity.finish();
                                 showNotification();

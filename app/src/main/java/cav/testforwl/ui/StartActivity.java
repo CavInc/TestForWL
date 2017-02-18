@@ -34,7 +34,6 @@ public class StartActivity extends Activity {
         new waitInStart().execute();
         // проверку активностей
         //PackageManager.PERMISSION_GRANTED
-        Log.d(TAG,Manifest.permission.RECEIVE_SMS);
         //int i = this.checkSelfPermission(Manifest.permission.RECEIVE_SMS);
        // System.out.println(this.checkSelfPermission(android.Manifest.permission.RECIVE_SMS));
 
