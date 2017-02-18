@@ -63,7 +63,7 @@ public class WebMessageActivity extends Activity {
         if (mDataManager.getPreferensManager().isLockScreen()) {
             Log.d(TAG,"LOCK SCREEN");
             getWindow().setFlags(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-            if (Build.VERSION.SDK_INT >=23) {
+            if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.KITKAT) {
                 mDecorView = getWindow().getDecorView();
                 hideSystemUI();
             }
