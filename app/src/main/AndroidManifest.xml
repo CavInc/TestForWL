@@ -38,7 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.WebMessageActivity">
+        <activity android:name=".ui.WebMessageActivity"
+                  android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".ui.StartActivity"

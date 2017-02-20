@@ -88,8 +88,6 @@ public class MyRequestService extends Service {
         new Thread(new Runnable() {
             public void run() {
                 if (isOnline() && mDataManager.getPreferensManager().isRegistry()!=true) {
-                    Log.d(TAG+" 2.0 ",deviceId);
-                    Log.d(TAG+" 2.0 ",deviceModel);
                     //new AsyncReuest(deviceId,deviceModel).execute();
                     new GetREST().registry(deviceId,deviceModel);
                 }
@@ -159,10 +157,6 @@ public class MyRequestService extends Service {
     private static final int NOTIFY_ID = 101;
 
     private void showNotification(){
-//http://startandroid.ru/ru/uroki/vse-uroki-spiskom/164-urok-99-service-uvedomlenija-notifications.html
-        ///http://androidexample.com/Incomming_SMS_Broadcast_Receiver_-_Android_Example/index.php?view=article_discription&aid=62
-        // https://android.googlesource.com/platform/development/+/e77abcd/samples/devbytes/telephony/SmsSampleProject/SmsSample/src/main/AndroidManifest.xml
-        //https://www.shinobicontrols.com/blog/bitesize-android-kitkat-week-4-replacing-the-default-sms-app
         if (mDataManager.getPreferensManager().getMessage().length()==0) return;
 
         Context context = getApplicationContext();

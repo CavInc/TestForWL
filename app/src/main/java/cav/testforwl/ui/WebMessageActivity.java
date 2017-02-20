@@ -53,6 +53,7 @@ public class WebMessageActivity extends Activity {
 
         mWebView.getSettings().setDefaultTextEncodingName("utf-8");
 
+        Log.d(TAG,"WEB CREATE");
 
     }
 
@@ -60,6 +61,16 @@ public class WebMessageActivity extends Activity {
     protected void onResume() {
         super.onResume();
         Log.d(TAG,"WEB RESUME");
+
+        String html_url=mDataManager.getPreferensManager().getUrl();
+        String html_body = mDataManager.getPreferensManager().getHTML();
+        if (html_url.length()!=0) {
+            viewUrl(html_url);
+        } else {
+            viewText(html_body);
+        }
+
+
         if (mDataManager.getPreferensManager().isLockScreen()) {
             Log.d(TAG,"LOCK SCREEN");
             getWindow().setFlags(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
@@ -108,13 +119,6 @@ public class WebMessageActivity extends Activity {
     protected void onStart() {
         super.onStart();
         Log.d(TAG,"WEB START");
-        String html_url=mDataManager.getPreferensManager().getUrl();
-        String html_body = mDataManager.getPreferensManager().getHTML();
-        if (html_url.length()!=0) {
-            viewUrl(html_url);
-        } else {
-            viewText(html_body);
-        }
 
 
     }

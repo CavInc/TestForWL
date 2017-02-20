@@ -28,8 +28,6 @@ public class TestWLApp extends Application {
             TelephonyManager telephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
             androidID = telephonyManager.getDeviceId();
         }
-        Log.d("APP",androidID);
-        Log.d("APP", Build.MODEL);
 
         // запускам сервис при старте приложения
         Intent intent = new Intent(this,MyRequestService.class);
