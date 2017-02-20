@@ -115,13 +115,6 @@ public class WebMessageActivity extends Activity {
             super.onBackPressed();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG,"WEB START");
-
-
-    }
 
     private void viewUrl(final String html_url) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
