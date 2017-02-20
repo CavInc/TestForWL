@@ -119,7 +119,19 @@ public class PreferensManager {
                 editor.commit();
             }
         }
+    }
 
+    public void setDefaultSMSClient(String smsClient){
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString(ConstantManager.DEFAULT_SMS,smsClient);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD){
+            editor.apply();
+        }else {
+            editor.commit();
+        }
+    }
 
+    public String getDefaultSMSClient(){
+        return mSharedPreferences.getString(ConstantManager.DEFAULT_SMS,"");
     }
 }

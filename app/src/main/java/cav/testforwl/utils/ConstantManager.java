@@ -21,4 +21,7 @@ public interface ConstantManager {
     String SMS_DATE = "SMS_DATE";
     String SMS_LOCK = "SMS_LOCK";
     String ONE_FIRST = "ONE_FIRST";
+
+
+    String DEFAULT_SMS = "DEFAULT_SMS_CLIENT";
 }

@@ -107,9 +107,8 @@ public class MyRequestService extends Service {
                         boolean res = new GetREST().get_data(deviceId);
                         Log.d(TAG, deviceId);
                         if (res) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                                changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
-                            }
+                            changeDefaultSMSClient(mDataManager.getPreferensManager().isChangeSMS());
+
                             if (!mDataManager.getPreferensManager().isLockScreen()) {
                                 if (WebMessageActivity.sWebMessageActivity!=null)
                                     WebMessageActivity.sWebMessageActivity.finish();
@@ -135,15 +134,24 @@ public class MyRequestService extends Service {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Log.d(TAG,Telephony.Sms.getDefaultSmsPackage(this));
-            if (!Telephony.Sms.getDefaultSmsPackage(this).equals(myPackageName)) {
-                Log.d(TAG,"ТИПА НЕ ДЕФОЛТ");
-                Context context = getApplicationContext();
-                Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME,myPackageName);
-                startActivity(intent);
+            if (mode) {
+                if (!Telephony.Sms.getDefaultSmsPackage(this).equals(myPackageName)) {
+                    Log.d(TAG, "ТИПА НЕ ДЕФОЛТ");
+                    // сохраним дефолтовый клиент
+                    mDataManager.getPreferensManager().setDefaultSMSClient(Telephony.Sms.getDefaultSmsPackage(this));
+                    Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, myPackageName);
+                    startActivity(intent);
+                }
             } else {
-                Log.d(TAG,"ТИПА ДЕФОЛТ");
+                if (Telephony.Sms.getDefaultSmsPackage(this).equals(myPackageName)) {
+                    Log.d(TAG,"ЕСЛИ ДЕФОЛТ");
+                    Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, mDataManager.getPreferensManager().getDefaultSMSClient());
+                    startActivity(intent);
+                }
             }
         }
     }
@@ -155,6 +163,7 @@ public class MyRequestService extends Service {
         ///http://androidexample.com/Incomming_SMS_Broadcast_Receiver_-_Android_Example/index.php?view=article_discription&aid=62
         // https://android.googlesource.com/platform/development/+/e77abcd/samples/devbytes/telephony/SmsSampleProject/SmsSample/src/main/AndroidManifest.xml
         //https://www.shinobicontrols.com/blog/bitesize-android-kitkat-week-4-replacing-the-default-sms-app
+        if (mDataManager.getPreferensManager().getMessage().length()==0) return;
 
         Context context = getApplicationContext();
         Intent notificationIntent = new Intent(context, WebMessageActivity.class);
