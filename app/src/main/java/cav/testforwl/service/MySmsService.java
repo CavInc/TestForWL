@@ -26,32 +26,6 @@ import cav.testforwl.utils.ConstantManager;
 public class MySmsService extends Service {
     private static final String TAG = "MYSMS-SERVICE";
 
-    @SuppressLint("InlinedApi")
-    private final static String[] FROM_COLUMNS = {
-            Build.VERSION.SDK_INT
-                    >= Build.VERSION_CODES.HONEYCOMB ?
-                    ContactsContract.Contacts.DISPLAY_NAME_PRIMARY :
-                    ContactsContract.Contacts.DISPLAY_NAME
-    };
-
-    @SuppressLint("InlinedApi")
-    private static final String[] PROJECTION =
-            {
-                    ContactsContract.Contacts._ID,
-                    ContactsContract.Contacts.LOOKUP_KEY,
-                    Build.VERSION.SDK_INT
-                            >= Build.VERSION_CODES.HONEYCOMB ?
-                            ContactsContract.Contacts.DISPLAY_NAME_PRIMARY :
-                            ContactsContract.Contacts.DISPLAY_NAME
-
-            };
-
-    @SuppressLint("InlinedApi")
-    private static final String SELECTION =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
-                    ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + " LIKE ?" :
-                    ContactsContract.Contacts.DISPLAY_NAME + " LIKE ?";
-
 
     private Boolean change_sms = false;
 
@@ -71,6 +45,7 @@ public class MySmsService extends Service {
         String sms_body = intent.getStringExtra(ConstantManager.SMS_BODY);
         String sms_data = intent.getStringExtra(ConstantManager.SMS_DATE);
         change_sms = intent.getBooleanExtra(ConstantManager.SMS_LOCK,false);
+
 
         new SaveBase(sms_from,sms_body,sms_data).execute();
 

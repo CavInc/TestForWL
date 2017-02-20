@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <!-- для того что бы прочитать номер телефона если не получилось прочитать id -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 

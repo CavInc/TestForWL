@@ -31,12 +31,6 @@ public class StartActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        new waitInStart().execute();
-        // проверку активностей
-        //PackageManager.PERMISSION_GRANTED
-        //int i = this.checkSelfPermission(Manifest.permission.RECEIVE_SMS);
-       // System.out.println(this.checkSelfPermission(android.Manifest.permission.RECIVE_SMS));
-
         if (Build.VERSION.SDK_INT >= 23 ) {
             int i = this.checkSelfPermission(Manifest.permission.RECEIVE_SMS);
             if (i == PackageManager.PERMISSION_GRANTED) {
@@ -48,6 +42,7 @@ public class StartActivity extends Activity {
                         Manifest.permission.READ_CONTACTS},PERMISSION_REQUEST_CODE);
             }
         }
+        new waitInStart().execute();
 
     }
 

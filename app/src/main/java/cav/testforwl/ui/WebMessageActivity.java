@@ -5,11 +5,13 @@ import android.app.ActivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class WebMessageActivity extends Activity {
 
     public static WebMessageActivity sWebMessageActivity;
     private View mDecorView;
+
+    private boolean mLockScreen;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,9 +57,12 @@ public class WebMessageActivity extends Activity {
 
         mWebView.getSettings().setDefaultTextEncodingName("utf-8");
 
+        mLockScreen = mDataManager.getPreferensManager().isLockScreen();
+
         Log.d(TAG,"WEB CREATE");
 
     }
+
 
     @Override
     protected void onResume() {
@@ -71,7 +78,7 @@ public class WebMessageActivity extends Activity {
         }
 
 
-        if (mDataManager.getPreferensManager().isLockScreen()) {
+        if (mLockScreen) {
             Log.d(TAG,"LOCK SCREEN");
             getWindow().setFlags(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
             if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.KITKAT) {
@@ -111,7 +118,7 @@ public class WebMessageActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (!mDataManager.getPreferensManager().isLockScreen())
+        if (!mLockScreen)
             super.onBackPressed();
     }
 
@@ -132,5 +139,36 @@ public class WebMessageActivity extends Activity {
     private void viewText(final String htmlMess){
         //mWebView.loadData(htmlMess,"text/html; charset=UTF-8",null);
         mWebView.loadDataWithBaseURL(null, htmlMess, "text/html", "utf-8", null);
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        //Toast toast = Toast.makeText(getApplicationContext(), "Нажата кнопка HOME", Toast.LENGTH_SHORT);
+       // toast.show();
+       // super.onUserLeaveHint();
+        Log.d(TAG,"HOME");
+        if (!mLockScreen) {
+            Log.d(TAG,"HOME SUPER");
+            super.onUserLeaveHint();
+        }
+    }
+
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            Log.d(TAG,"LONG PRESSED");
+            if (mLockScreen) return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            Log.d(TAG,"MENU");
+            if (mLockScreen) return false;
+        }
+        return super.onKeyDown(keyCode, event);
+
     }
 }
