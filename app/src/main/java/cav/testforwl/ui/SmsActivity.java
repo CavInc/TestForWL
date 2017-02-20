@@ -43,10 +43,7 @@ public class SmsActivity extends Activity implements View.OnClickListener {
         delBtn = (ImageButton) findViewById(R.id.delete_btn);
         delBtn.setOnClickListener(this);
 
-        record = mDataManager.getAllRecord();
-        adapter = new SmsAdapter(this,R.layout.item_sms_list,record);
-        adapter.setNotifyOnChange(true);
-        mListView.setAdapter(adapter);
+
 
         mListView.setOnItemClickListener(mItemListener);
         mListView.setOnItemLongClickListener(mItemLongListener);
@@ -64,9 +61,10 @@ public class SmsActivity extends Activity implements View.OnClickListener {
     protected void onResume() {
         super.onResume();
         Log.d(TAG,"SMS ACTIVITY RESUME");
-        //record.clear();
-       record = mDataManager.getAllRecord();
-       adapter.notifyDataSetChanged();
+        record = mDataManager.getAllRecord();
+        adapter = new SmsAdapter(this,R.layout.item_sms_list,record);
+        adapter.setNotifyOnChange(true);
+        mListView.setAdapter(adapter);
     }
 
     @Override
