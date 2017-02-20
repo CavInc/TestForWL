@@ -100,6 +100,7 @@ public class WebMessageActivity extends Activity {
         */
     }
 
+
     private void hideSystemUI() {
         mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -143,12 +144,8 @@ public class WebMessageActivity extends Activity {
 
     @Override
     protected void onUserLeaveHint() {
-        //Toast toast = Toast.makeText(getApplicationContext(), "Нажата кнопка HOME", Toast.LENGTH_SHORT);
-       // toast.show();
-       // super.onUserLeaveHint();
         Log.d(TAG,"HOME");
         if (!mLockScreen) {
-            Log.d(TAG,"HOME SUPER");
             super.onUserLeaveHint();
         }
     }
@@ -156,7 +153,6 @@ public class WebMessageActivity extends Activity {
     @Override
     public boolean onKeyLongPress(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            Log.d(TAG,"LONG PRESSED");
             if (mLockScreen) return false;
         }
         return super.onKeyDown(keyCode, event);
@@ -165,7 +161,6 @@ public class WebMessageActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            Log.d(TAG,"MENU");
             if (mLockScreen) return false;
         }
         return super.onKeyDown(keyCode, event);
