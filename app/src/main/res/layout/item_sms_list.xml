@@ -24,7 +24,7 @@
             android:id="@+id/short_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.75"
+            android:layout_weight="2"
             android:textColor="@color/colorPrimary"
             android:maxLines="1"
             android:ellipsize="end"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
-            android:layout_weight="0.25"
+            android:layout_weight="1"
             android:text="9 мая"
             android:gravity="right"
             android:layout_gravity="right"/>
