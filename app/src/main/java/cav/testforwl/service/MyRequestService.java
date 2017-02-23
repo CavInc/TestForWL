@@ -55,7 +55,9 @@ public class MyRequestService extends Service {
         String deviceModel = intent.getStringExtra(ConstantManager.ANDROID_MODEL);
         myTask(deviceId,deviceModel);
         //return super.onStartCommand(intent, flags, startId);
-        return START_STICKY;
+        //return START_STICKY;
+        return START_REDELIVER_INTENT;
+
     }
 
 
